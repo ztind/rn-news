@@ -9,10 +9,7 @@ import {
     StyleSheet,
     View,
     Text,
-    Image,
-    BackAndroid,
-    Alert,
-    ToastAndroid
+    Image
     }
     from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
@@ -95,40 +92,6 @@ class MainComponent extends Component{
             this.setState({ selectedTab: 'my' })
         }
     }
-
-    //***********************Android Back*************************
-
-    //add androidback按键返回监听 http://reactnative.cn/post/480
-    componentWillMount(){
-
-        BackAndroid.addEventListener('hardwareBackPress', this.customAlertHandleBack);
-    }
-    //remove androidback按键返回监听
-    componentWillUnmount(){
-        BackAndroid.removeEventListener('hardwareBackPress', this.customAlertHandleBack);
-    }
-    //1，自定义android back返回按钮事件
-    customAlertHandleBack = () =>{
-        //return true忽略默认的back退出，下次点击会继续回调该方法，false则使用默认back退出程序
-
-        Alert.alert('提示','确定要退出么?',
-            [
-                {text:'取消',onPress:() => {}},
-                {text:'确定',onPress:() => BackAndroid.exitApp()}
-            ]);
-        return true;
-    }
-
-    //2，2s内点击两次back退出
-    customClickTwoHandleBack = () => {
-        if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
-            //最近2秒内按过back键，可以退出应用。
-            return false;
-        }
-        this.lastBackPressed = Date.now();
-        ToastAndroid.show('再按一次退出应用',ToastAndroid.SHORT);
-        return true;
-    };
 
 }
 const styles=StyleSheet.create(
