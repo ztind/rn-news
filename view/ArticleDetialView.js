@@ -10,7 +10,6 @@ import {
     Text,
     PixelRatio,
     WebView,
-    BackAndroid,
     TouchableHighlight
     }
     from 'react-native';
@@ -41,22 +40,6 @@ class ArticleDetialView extends Component{
         navigator.pop();
     }
 
-    //***********************Android Back*************************
-
-    //add androidback按键返回监听
-    componentWillMount(){
-        BackAndroid.addEventListener('hardwareBackPress', this.customHandleBack);
-    }
-    //remove androidback按键返回监听
-    componentWillUnmount(){
-        BackAndroid.removeEventListener('hardwareBackPress', this.customHandleBack);
-    }
-    //自定义android back返回按钮事件
-    customHandleBack = () =>{
-        this.props.navigator.pop();
-        BackAndroid.removeEventListener('hardwareBackPress', this.customHandleBack);
-        return true; //false直接退出
-    }
 }
 const styles=StyleSheet.create(
     {
